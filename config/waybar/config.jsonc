@@ -1,0 +1,100 @@
+// ~/.config/waybar/config.jsonc
+{
+    "layer": "top",
+    "position": "top",
+    "height": 24,
+    "spacing": 8,
+
+    "modules-left": [
+        "custom/launcher",
+        "hyprland/workspaces"
+    ],
+    "modules-center": [
+        "hyprland/window"
+    ],
+    "modules-right": [
+        "pulseaudio",
+        "network",
+        "battery",
+        "clock",
+        "custom/power"
+    ],
+
+    // Módulos Individuais
+    
+    "custom/launcher": {
+        "format": "󰣇",
+        "tooltip": false,
+        "on-click": "nwg-drawer -p top-center" // Altere para seu lançador de apps, ex: "rofi -show drun"
+    },
+
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "default": "○",
+            "active": "●",
+            "persistent": "x", // Para workspaces persistentes
+            "urgent": "●"
+        },
+        "on-click": "activate",
+        "persistent-workspaces": {
+            "1": [], "2": [], "3": [], "4": [], "5": []
+        }
+    },
+
+    "hyprland/window": {
+        "format": "{}",
+        "max-length": 50,
+        "separate-outputs": true
+    },
+
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% 󰂄",
+        "format-plugged": "{capacity}% 󰂄",
+        "format-alt": "{time} {icon}",
+        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    },
+
+    "network": {
+        "format-wifi": "{essid} 󰤨",
+        "format-ethernet": "{ifname} 󰈀",
+        "format-disconnected": "󰤮 Desconectado",
+        "tooltip-format": "{ifname} via {gwaddr} ",
+        "on-click": "nm-connection-editor" // Abre o editor de conexões de rede
+    },
+
+    "pulseaudio": {
+        "format": "{volume}% {icon} {format_source}",
+        "format-muted": "󰖁 Mudo",
+        "format-source": "  {volume}% ",
+        "format-source-muted": " ",
+        "format-icons": {
+            "headphone": "󰋋",
+            "hands-free": "󰋎",
+            "headset": "󰋎",
+            "phone": "󰄜",
+            "portable": "󰄜",
+            "car": "󰄋",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol",
+        "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
+        "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%"
+    },
+    
+    "tray": {
+        "icon-size": 18,
+        "spacing": 10
+    },
+
+    "custom/power": {
+        "format": "",
+        "tooltip": false,
+        "on-click": "nwg-bar" // Seu comando para menu de energia
+    }
+}
